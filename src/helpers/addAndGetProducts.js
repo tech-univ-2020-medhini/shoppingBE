@@ -18,7 +18,8 @@ const addProducts = async () => {
   }));
   await db.products.bulkCreate(newProductsArray);
   const categoriesSet = new Set(categoriesArray);
-  await categories.writeCategories(categoriesSet);
+  const categoriesString = JSON.stringify([...categoriesSet]);
+  await categories.writeCategories(categoriesString);
 };
 
 const getProducts = async () => {
