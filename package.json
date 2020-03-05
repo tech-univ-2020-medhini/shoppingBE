@@ -18,6 +18,8 @@
     "nodemon": "^2.0.2",
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
+    "promise-fs": "^2.1.1",
+    "promise-js": "0.0.7",
     "sequelize": "^5.21.3",
     "uuid": "^3.4.0"
   },
