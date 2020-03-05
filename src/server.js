@@ -7,6 +7,10 @@ const buildServer = async () => {
   const server = Hapi.Server({
     host: process.env.SERVER_HOST,
     port: process.env.SERVER_PORT,
+    routes: {
+      cors: true,
+    },
+
   });
   server.route(routes);
   await server.validator(Joi);
