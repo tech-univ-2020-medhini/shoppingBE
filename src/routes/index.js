@@ -1,4 +1,4 @@
 const { productRoutes } = require('./products');
-const { categoryRoute } = require('./categories');
+const { categoryRoutes } = require('./categories');
 
-module.exports = [...productRoutes, ...categoryRoute];
+module.exports = [...productRoutes, ...categoryRoutes];
