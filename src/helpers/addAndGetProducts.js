@@ -16,4 +16,13 @@ const addProducts = async () => {
   const categoriesSet = new Set(categoriesArray);
   console.log(categoriesSet);
 };
-module.exports = addProducts;
+
+const getProducts = async () => {
+  const result = await db.products.findAll();
+  console.log(result);
+  if (result.length === 0) {
+    return false;
+  }
+  return result;
+};
+module.exports = { addProducts, getProducts };

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const addProducts = require('../../src/helpers/addProducts');
+const { addProducts } = require('../../src/helpers/addAndGetProducts');
 const url = require('../../src/constants/url');
 const db = require('../../models');
 
