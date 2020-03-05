@@ -6,10 +6,11 @@ const addProducts = async () => {
   const categoriesArray = [];
   const response = await axios.get(url);
   const productsArray = response.data;
-  productsArray.forEach((element) => {
-    const res = axios.get(`${url}/${element.id}/category`);
-    const category = res.data;
-    const product = { element, category };
+  productsArray.forEach(async (element) => {
+    const res = await axios.get(`${url}/${element.id}/category`);
+    const { category } = res.data;
+    const product = element;
+    product.category = category;
     categoriesArray.push(category);
     db.products.create(product);
   });
@@ -19,7 +20,6 @@ const addProducts = async () => {
 
 const getProducts = async () => {
   const result = await db.products.findAll();
-  console.log(result);
   if (result.length === 0) {
     return false;
   }

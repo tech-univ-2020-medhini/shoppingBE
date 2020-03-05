@@ -1,11 +1,11 @@
-const { getProducts } = require('../handler/products');
+const { getProductsHandler } = require('../handler/products');
 
 const productRoutes = [
   {
     path: '/products',
     method: 'GET',
     config: {
-      handler: getProducts,
+      handler: getProductsHandler,
     },
   },
 ];
