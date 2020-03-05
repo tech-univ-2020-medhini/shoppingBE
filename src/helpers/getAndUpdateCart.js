@@ -12,7 +12,12 @@ const getCart = async () => {
   return cart;
 };
 
-const updateCart = async () => {
-
+const updateCart = async (productId) => {
+  const result = await db.products.update({ cart: db.sequelize.literal('field + 1') }, {
+    where: {
+      id: productId,
+    },
+  });
+  return result;
 };
 module.exports = { getCart, updateCart };

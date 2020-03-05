@@ -12,6 +12,8 @@ describe('The add product hepler', () => {
     ));
     const mockDBCreate = jest.spyOn(db.products, 'bulkCreate');
     mockDBCreate.mockResolvedValue(true);
+    const mockWriteCategories = jest.spyOn(categories, 'writeCategories');
+    mockWriteCategories.mockResolvedValue(true);
     await addProducts();
     expect(mockAxios).toHaveBeenCalledWith(url);
     expect(mockAxios).toHaveBeenCalledTimes(4);
@@ -25,6 +27,8 @@ describe('The add product hepler', () => {
     ));
     const mockDB = jest.spyOn(db.products, 'bulkCreate');
     mockDB.mockResolvedValue(true);
+    const mockWriteCategories = jest.spyOn(categories, 'writeCategories');
+    mockWriteCategories.mockResolvedValue(true);
     await addProducts();
     expect(mockDB).toHaveBeenCalledWith(
       [{ id: 1, category: undefined, cart: 0 },
