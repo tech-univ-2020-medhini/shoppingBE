@@ -1,4 +1,5 @@
 const { getProductsHandler } = require('../handler/products');
+const updateCartHandler = require('../handler/cart');
 
 const productRoutes = [
   {
@@ -6,6 +7,13 @@ const productRoutes = [
     method: 'GET',
     config: {
       handler: getProductsHandler,
+    },
+  },
+  {
+    path: '/products/{id}/cart',
+    method: 'PATCH',
+    config: {
+      handler: updateCartHandler,
     },
   },
 ];

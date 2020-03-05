@@ -4,8 +4,10 @@ const cart = require('../../src/helpers/updateCart');
 describe('the update cart handler', () => {
   const mockReq = {
     payload: {
-      id: 1,
       value: 4,
+    },
+    params: {
+      id: 1,
     },
   };
   const mockCode = jest.fn();
