@@ -1,29 +1,33 @@
-const getCartHandler = require('../../src/handler/categories');
-const cart = require('../../src/utils/categoriesJSON');
+const updateCartHandler = require('../../src/handler/cart');
+const cart = require('../../src/helpers/updateCart');
 
 describe('the update cart handler', () => {
   const mockReq = {
+    payload: {
+      id: 1,
+      value: 4,
+    },
   };
   const mockCode = jest.fn();
   const mockH = {
     response: jest.fn(() => ({ code: mockCode })),
   };
-  it('should respond with 200 with the cart values of all items above 0', async () => {
-    const mockCategoriesFS = jest.spyOn(cart, 'getCart');
-    mockCategoriesFS.mockResolvedValue(['123', '456']);
-    await getCartHandler(mockReq, mockH);
-    expect(mockCategoriesFS).toHaveBeenCalled();
+  it('should respond with 200 and the updated cart values', async () => {
+    const mockCart = jest.spyOn(cart, 'updateCart');
+    mockCart.mockResolvedValue({});
+    await updateCartHandler(mockReq, mockH);
+    expect(mockCart).toHaveBeenCalledWith(1, 4);
     expect(mockCode).toHaveBeenCalledWith(200);
-    expect(mockH.response).toHaveBeenCalledWith(['123', '456']);
-    mockCategoriesFS.mockRestore();
+    expect(mockH.response).toHaveBeenCalledWith({});
+    mockCart.mockRestore();
   });
   it('should respond with 500 error if an error occurs', async () => {
-    const mockCategoriesFS = jest.spyOn(cart, 'getCart');
-    mockCategoriesFS.mockRejectedValue(new Error('error'));
-    await getCartHandler(mockReq, mockH);
-    expect(mockCategoriesFS).toHaveBeenCalled();
+    const mockCart = jest.spyOn(cart, 'updateCart');
+    mockCart.mockRejectedValue(new Error('error'));
+    await updateCartHandler(mockReq, mockH);
+    expect(mockCart).toHaveBeenCalledWith(1, 4);
     expect(mockCode).toHaveBeenCalledWith(500);
     expect(mockH.response).toHaveBeenCalledWith('error');
-    mockCategoriesFS.mockRestore();
+    mockCart.mockRestore();
   });
 });
