@@ -1,5 +1,5 @@
 const fs = require('promise-fs');
-const { readCategories } = require('../../src/utils/getCategories');
+const { readCategories } = require('../../src/utils/categoriesJSON');
 
 describe('the read categories function', () => {
   it('should call fs readfile ', async () => {

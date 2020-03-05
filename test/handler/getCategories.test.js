@@ -1,5 +1,5 @@
 const getCategories = require('../../src/handler/categories');
-const categories = require('../../src/utils/getCategories');
+const categories = require('../../src/utils/categoriesJSON');
 
 describe('the get categories handler', () => {
   const mockReq = {

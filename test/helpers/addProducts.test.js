@@ -2,6 +2,7 @@ const axios = require('axios');
 const { addProducts } = require('../../src/helpers/addAndGetProducts');
 const url = require('../../src/constants/url');
 const db = require('../../models');
+const categories = require('../../src/utils/categoriesJSON');
 
 describe('The add product hepler', () => {
   it('should query the external api for products', async () => {
@@ -32,5 +33,17 @@ describe('The add product hepler', () => {
     );
     mockAxios.mockReset();
     mockDB.mockReset();
+  });
+  it('should call the write categories handler to store the categories', async () => {
+    const mockAxios = jest.spyOn(axios, 'get');
+    mockAxios.mockImplementation(() => Promise.resolve(
+      { data: [{ id: 1 }, { id: 2 }, { id: 3 }] },
+    ));
+    const mockDBCreate = jest.spyOn(db.products, 'bulkCreate');
+    mockDBCreate.mockResolvedValue(true);
+    const mockWriteCategories = jest.spyOn(categories, 'writeCategories');
+    mockWriteCategories.mockResolvedValue(true);
+    await addProducts();
+    expect(mockWriteCategories).toHaveBeenCalled();
   });
 });

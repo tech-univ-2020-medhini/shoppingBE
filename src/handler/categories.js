@@ -1,4 +1,4 @@
-const categories = require('../utils/getCategories');
+const categories = require('../utils/categoriesJSON');
 
 const getCategories = async (request, h) => {
   try {

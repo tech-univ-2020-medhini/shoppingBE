@@ -1,6 +1,7 @@
 const axios = require('axios');
 const url = require('../constants/url');
 const db = require('../../models');
+const categories = require('../utils/categoriesJSON');
 
 const addProducts = async () => {
   const categoriesArray = [];
@@ -15,10 +16,9 @@ const addProducts = async () => {
     categoriesArray.push(category);
     return product;
   }));
-  console.log(newProductsArray);
   await db.products.bulkCreate(newProductsArray);
   const categoriesSet = new Set(categoriesArray);
-  console.log(categoriesSet);
+  await categories.writeCategories(categoriesSet);
 };
 
 const getProducts = async () => {
