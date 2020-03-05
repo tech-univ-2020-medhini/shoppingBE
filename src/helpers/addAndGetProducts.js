@@ -6,14 +6,17 @@ const addProducts = async () => {
   const categoriesArray = [];
   const response = await axios.get(url);
   const productsArray = response.data;
+  const newProductsArray = [];
   productsArray.forEach(async (element) => {
     const res = await axios.get(`${url}/${element.id}/category`);
     const { category } = res.data;
     const product = element;
     product.category = category;
+    product.cart = 0;
     categoriesArray.push(category);
     db.products.create(product);
   });
+  // await db.products.bulkCreate(newProductsArray);
   const categoriesSet = new Set(categoriesArray);
   console.log(categoriesSet);
 };
