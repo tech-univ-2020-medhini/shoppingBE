@@ -9,7 +9,7 @@ describe('The add product hepler', () => {
     mockAxios.mockImplementation(() => Promise.resolve(
       { data: [{ id: 1 }, { id: 2 }, { id: 3 }] },
     ));
-    const mockDBCreate = jest.spyOn(db.products, 'create');
+    const mockDBCreate = jest.spyOn(db.products, 'bulkCreate');
     mockDBCreate.mockResolvedValue(true);
     await addProducts();
     expect(mockAxios).toHaveBeenCalledWith(url);
@@ -22,10 +22,14 @@ describe('The add product hepler', () => {
     mockAxios.mockImplementation(() => Promise.resolve(
       { data: [{ id: 1 }, { id: 2 }, { id: 3 }] },
     ));
-    const mockDB = jest.spyOn(db.products, 'create');
+    const mockDB = jest.spyOn(db.products, 'bulkCreate');
     mockDB.mockResolvedValue(true);
     await addProducts();
-    expect(mockDB).toHaveBeenCalledTimes(3);
+    expect(mockDB).toHaveBeenCalledWith(
+      [{ id: 1, category: undefined, cart: 0 },
+        { id: 2, category: undefined, cart: 0 },
+        { id: 3, category: undefined, cart: 0 }],
+    );
     mockAxios.mockReset();
     mockDB.mockReset();
   });

@@ -5,4 +5,8 @@ const readCategories = async () => {
   const categories = JSON.parse(result);
   return categories;
 };
-module.exports = { readCategories };
+
+const writeCategories = async (categories) => {
+  fs.writeFile('./resources/categories.json', categories);
+};
+module.exports = { readCategories, writeCategories };

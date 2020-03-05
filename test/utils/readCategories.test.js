@@ -6,7 +6,7 @@ describe('the read categories function', () => {
     const mockFS = jest.spyOn(fs, 'readFile');
     mockFS.mockResolvedValue('[]');
     await readCategories();
-    expect(mockFS).toHaveBeenCalled();
+    expect(mockFS).toHaveBeenCalledWith('./resources/categories.json');
     mockFS.mockReset();
   });
   it('should retun an array containing the categories', async () => {
