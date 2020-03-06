@@ -1,4 +1,5 @@
 const updateQuantity = require('../handler/quantity');
+const { patchQuantity } = require('../schemas');
 
 const quantityRoutes = [
   {
@@ -6,6 +7,9 @@ const quantityRoutes = [
     method: 'PATCH',
     config: {
       handler: updateQuantity,
+      validate: {
+        payload: patchQuantity,
+      },
     },
   },
 ];

@@ -1,5 +1,6 @@
 const { getProductsHandler } = require('../handler/products');
 const updateCartHandler = require('../handler/cart');
+const { patchCartParams, patchCartPayload } = require('../schemas');
 
 const productRoutes = [
   {
@@ -14,6 +15,10 @@ const productRoutes = [
     method: 'PATCH',
     config: {
       handler: updateCartHandler,
+      validate: {
+        params: patchCartParams,
+        payload: patchCartPayload,
+      },
     },
   },
 ];
